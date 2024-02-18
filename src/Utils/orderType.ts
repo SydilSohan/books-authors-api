@@ -1,6 +1,7 @@
 //type annotations for incoming webhook payload
 
 export interface Order {
+  id : number ;
     app_id: number;
     billing_address: {
       address1: string;

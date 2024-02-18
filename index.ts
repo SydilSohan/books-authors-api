@@ -1,11 +1,14 @@
 import express, { Request, Response, NextFunction, response } from 'express';
 import dotenv, { config } from 'dotenv'; // For secure environment variable handling
-import { Order } from './Utils/orderType';
+import { Order } from './src/Utils/orderType';
 import { PrismaClient } from '@prisma/client';
-import validatedShopifySignature from './middleware/Verify';
+import validatedShopifySignature from './src/middlewares/Verify';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 import rateLimit from 'express-rate-limit';
-import CustomError from './Utils/CustomError';
+import CustomError from './src/Utils/CustomError';
+import createOrder from './src/functions/createOrder';
+// import updateOrder from './src/functions/updateOrder';
+const errorHandler  = require("./src/controllers/errorHandler")
 dotenv.config();
 const app = express();
 const port = process.env.PORT || 3000;
@@ -32,47 +35,66 @@ const limiter = rateLimit({
 })
 // Apply the rate limiting middleware to all requests.
 app.use(limiter)
+// app.put("/webhooks/orders/update/:id", async(req : Request, res : Response, next : NextFunction) => {
+//   const order: Order = req.body
+// //check if the order is coming from valid app id, can set to (order.app_id !== "specific shopify app id")
+
+//   if (!order.app_id) {
+//     const err = new CustomError("no valid app id", 401)
+//     next(err)
+//   }
+//   const id = req.query
+//   console.log(id)
+//   // // save the order data in database and check for error type
+//   // const [data, error] = await updateOrder(req.params, order)
+//   // if(data) {
+//   //   res.status(200).json({
+//   //     status : "success",
+//   //     data
+//   //    }) 
+//   // }
+//   // if (error) {
+//   //   if ( error instanceof PrismaClientKnownRequestError) {
+//   //   const err = new CustomError(error.message, 404)
+//   //     next(err)
+//   //   }
+
+//   //   next(error)
+//   // } 
+ 
+//   console.log("Webhook received for update")
+  
+// } )
+//order creation route
 app.post('/webhooks/orders/create',
   // validate the request using middleware
   validatedShopifySignature(),
   async (req: Request, res: Response, next : NextFunction) => {
-    //creating necessary parameters for verifySignature function to validate the request
-    // const secretKey = process.env.SHOPIFY_SIGNATURE_SECRET; 
-    // const url = req.url;
-    // const body = JSON.stringify(req.body);
-    // const signature = req.headers['x-shopify-hmac-sha256'] as string;
     const order: Order = req.body
+    console.log(`order is ${order.id}`)
+  //check if the order is coming from valid app id, can set to (order.app_id !== "specific shopify app id")
+
     if (!order.app_id) {
       const err = new CustomError("no valid app id", 401)
       next(err)
     }
-    let newOrder 
-    // save the order data in database
-    try {
-      newOrder = await prisma.orders.create({
-        data: {
-          client_details: order.client_details,
-          current_total_price: order.current_total_price,
-          billing_address: order.billing_address,
-          confirmation_number: order.confirmation_number,
-          current_total_additional_fees_set: order.current_total_additional_fees_set,
-          buyer_accepts_marketing: order.buyer_accepts_marketing,
-          company : order.company,
-          cancelled_reason : order.cancel_reason
-        }
-      })
-     
-    } catch (error: any) {
-      if (error instanceof PrismaClientKnownRequestError) {
-       const error = new CustomError("Error Occured in ORM", 400)
-       next(error)
-      }
+    // save the order data in database and check for error type
+    const [data, error] = await createOrder(order)
+    if(data) {
+      res.status(200).json({
+        status : "success",
+        data
+       }) 
     }
-    res.status(200).json({
-      status : newOrder ? "completed" : "fail",
-      data : newOrder || null
-     
-    }) 
+    if (error) {
+      if ( error instanceof PrismaClientKnownRequestError) {
+      const err = new CustomError(error.message, 404)
+        next(err)
+      }
+
+      next(error)
+    } 
+   
     console.log("Webhook received")
     
   });
@@ -82,14 +104,7 @@ app.post('/webhooks/orders/create',
        next(err)
   })
 //global error handling middleware
-  app.use((error : any, req : Request, res : Response, next : NextFunction) => {
-    error.statusCode  =  error.statusCode || 500;
-    error.status = error.status || "error";
-    error.message = error.message || "Internal server error"
-    res.status(error.statusCode).json({
-      status : error.status,
-      message : error.message,
-      statusCode : error.statusCode
-    })
-    })
+  app.use(errorHandler)
+
+
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));

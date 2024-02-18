@@ -29,7 +29,7 @@ export default function validatedShopifySignature() {
 			}
 			const hmac = req.headers['x-shopify-hmac-sha256']
 			const hash = crypto.createHmac('sha256', SHOPIFY_SIGNATURE_SECRET).update(rawBody).digest('base64')
-			// console.log(`hmac is ${hmac} and hash is ${hash}}`)
+			console.log(`hmac is ${hmac} and hash is ${hash}}`)
 			const signatureOk = crypto.timingSafeEqual(Buffer.from(hash), Buffer.from(hmac.toString()))
 			if (!signatureOk) {
 				const error = new CustomError("keys doesn't match", 401)
