@@ -3,8 +3,21 @@ import { PrismaClient } from "@prisma/client";
 const prisma  = new PrismaClient()
 export default async function createOrder(orderData : Order) {
     try {
-     const newOrder = await prisma.orders.create({
-          data: {
+
+      //using upsert fucntion to create row if doesnt exist
+     const newOrder = await prisma.orders.upsert({
+      where : {order_id : orderData.id},
+      update : {     client_details: orderData.client_details,
+        current_total_price: orderData.current_total_price,
+        billing_address: orderData.billing_address,
+        confirmation_number: orderData.confirmation_number,
+        current_total_additional_fees_set: orderData.current_total_additional_fees_set,
+        buyer_accepts_marketing: orderData.buyer_accepts_marketing,
+        company : orderData.company,
+        cancelled_reason : orderData.cancel_reason,
+       },
+          create: {
+            
             client_details: orderData.client_details,
             current_total_price: orderData.current_total_price,
             billing_address: orderData.billing_address,
@@ -12,7 +25,8 @@ export default async function createOrder(orderData : Order) {
             current_total_additional_fees_set: orderData.current_total_additional_fees_set,
             buyer_accepts_marketing: orderData.buyer_accepts_marketing,
             company : orderData.company,
-            cancelled_reason : orderData.cancel_reason
+            cancelled_reason : orderData.cancel_reason,
+           order_id : orderData.id
           }
 
         })
