@@ -18,9 +18,10 @@ if (!SHOPIFY_SIGNATURE_SECRET) {
 }
 export default function validatedShopifySignature() {
 	return async (req: Request, res: Response, next: NextFunction) => {
+		console.log(`header is ${JSON.stringify(req.headers)}`)
+
 		try {
-			const body = JSON.parse(req.rawBody)
-			const rawBody = JSON.stringify(req.body)
+			const rawBody = req.rawBody
 			// console.log(JSON.parse(req.rawBody))
 			if (typeof rawBody == 'undefined') {
 				throw new CustomError(
