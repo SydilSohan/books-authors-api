@@ -5,7 +5,7 @@ import validatedShopifySignature from './src/middlewares/Verify';
 import rateLimit from 'express-rate-limit';
 import CustomError from './src/Utils/CustomError';
 
-const errorHandler  = require("./src/controllers/errorHandler")
+import errorHandler from './src/controllers/errorHandler';
 import { param } from 'express-validator';
 import updateOrderHandler from './src/routes/updateRoute';
 import upsertRoute from './src/routes/upsertRoute';
