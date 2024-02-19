@@ -6,7 +6,7 @@ export default async function createOrder(orderData : Order) {
 
       //using upsert fucntion to create row if doesnt exist
      const newOrder = await prisma.orders.upsert({
-      where : {order_id : orderData.id},
+      where : {order_id : orderData.id.toString()},
       update : {     client_details: orderData.client_details,
         current_total_price: orderData.current_total_price,
         billing_address: orderData.billing_address,
@@ -26,7 +26,7 @@ export default async function createOrder(orderData : Order) {
             buyer_accepts_marketing: orderData.buyer_accepts_marketing,
             company : orderData.company,
             cancelled_reason : orderData.cancel_reason,
-           order_id : orderData.id
+           order_id : orderData.id.toString()
           }
 
         })

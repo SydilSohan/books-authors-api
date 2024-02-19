@@ -12,7 +12,7 @@ datasource db {
 
 model Orders {
   id                                String  @id @unique @default(cuid())
-  order_id                          BigInt? @unique
+  order_id                          String? @unique
   billing_address                   Json?
   client_details                    Json?
   confirmation_number               String?

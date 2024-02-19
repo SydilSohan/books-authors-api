@@ -4,7 +4,7 @@ const prisma  = new PrismaClient()
 export default async function updateOrder(id : number, orderData : Order) {
     try {
      const updatedOrder  = await prisma.orders.update({
-        where : { order_id : id},
+        where : { order_id : id.toString()},
         data : { 
          client_details: orderData.client_details,
          current_total_price: orderData.current_total_price,
