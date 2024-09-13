@@ -1,28 +1,25 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-generator client {
-  provider = "prisma-client-js"
-}
-
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-model Orders {
-  id                                String  @id @unique @default(cuid())
-  order_id                          String? @unique
-  billing_address                   Json?
-  client_details                    Json?
-  confirmation_number               String?
-  current_total_additional_fees_set Json?
-  current_total_price               String?
-  cancelled_at                       String?
-  cancelled_reason                    String?
-  browser_ip String?
-  buyer_accepts_marketing Boolean?
-  company Json?
+generator client {
+  provider = "prisma-client-js"
+}
 
-  
+model Author {
+  id        Int      @id @default(autoincrement())
+  name      String
+  bio       String? // Optional field
+  birthdate DateTime
+  books     Book[]
+}
+
+model Book {
+  id             Int      @id @default(autoincrement())
+  title          String
+  description    String? // Optional field
+  published_date DateTime
+  author         Author   @relation(fields: [authorId], references: [id])
+  authorId       Int
 }
