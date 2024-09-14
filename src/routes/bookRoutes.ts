@@ -1,9 +1,3 @@
-// implement following endpoints for books:
-// id (primary key, auto-increment)
-// title (string, required)
-// description (text, optional)
-// published_date (date, required)
-// author_id (foreign key, references authors.id, required)
 import { Router } from "express";
 
 import {
@@ -12,6 +6,7 @@ import {
   deleteBook,
   updateBook,
   createBook1,
+  getBookDetails,
 } from "../controllers/booksController";
 import { validateMiddleware } from "@src/middlewares/validate";
 import { bookSchema } from "@src/Utils/joiSchemas";
@@ -21,5 +16,6 @@ router.get("/", getBooks);
 router.get("/:id", getBookById);
 router.post("/", validateMiddleware(bookSchema), createBook1);
 router.delete("/:id", deleteBook);
-router.put("/:id", updateBook);
+router.put("/:id", validateMiddleware(bookSchema), updateBook);
+router.get("/:id/details", getBookDetails);
 export default router;

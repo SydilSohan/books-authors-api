@@ -1,4 +1,4 @@
-// utils/prismaErrorMap.ts
+// can be used to convert sensitive error strings to non sensitive errors
 export const prismaErrorMap: { [key: string]: string } = {
   P1013: "The provided database string is invalid.",
   P1014: "The underlying resource for the model does not exist.",

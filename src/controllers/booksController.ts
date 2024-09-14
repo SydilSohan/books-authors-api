@@ -1,137 +1,24 @@
 import { Request, Response, NextFunction } from "express";
 import { PrismaClient, Prisma } from "@prisma/client";
-import { successResponse } from "../Utils/response";
-import { NotFoundError, UpdateError, ValidationError } from "@src/Utils/Errors";
+
+import { BadRequetError } from "@src/exceptions/BadRequest";
+import { ErrorCodes } from "@src/exceptions/CustomError";
+import {
+  NotFoundError,
+  UpdateError,
+  ValidationError,
+} from "@src/exceptions/Errors";
+import { successResponse } from "@src/Utils/response";
 
 const prisma = new PrismaClient();
-// type QueryParams = {
-//   author: string;
-// };
-// // export const getBooks = async (
-// //   req: Request<QueryParams, {}, {}>,
-// //   res: Response,
-// //   next: NextFunction
-// // ) => {
-// //   const authorQuery = req.query.author;
-// //   try {
-// //     if (authorQuery) {
-// //       const authorId = parseInt(authorQuery as string);
-// //       if (isNaN(authorId)) {
-// //         return next(
-// //           new ValidationError([{ field: "author", message: "Invalid query" }])
-// //         );
-// //       }
-// //       const authorExists = await prisma.author.findUnique({
-// //         where: { id: authorId },
-// //       });
-// //       if (!authorExists) {
-// //         return next(
-// //           new ValidationError([
-// //             { field: "author", message: "authorId does not exist" },
-// //           ])
-// //         );
-// //       }
-// //       const books = await prisma.book.findMany({
-// //         where: {
-// //           authorId,
-// //         },
-// //       });
-// //       return successResponse(res, books);
-// //     }
-// //     const books = await prisma.book.findMany();
-// //     successResponse(res, books);
-// //   } catch (error) {
-// //     next(new NotFoundError());
-// //   }
-// // };
-// export const getBooks = async (
-//   req: Request<QueryParams, {}, {}>,
-//   res: Response,
-//   next: NextFunction
-// ) => {
-//   const {
-//     author: authorQuery,
-//     title: titleQuery,
-//     authorName: authorNameQuery,
-//   } = req.query;
-
-//   try {
-//     const filters: Prisma.BookWhereInput = {};
-
-//     if (authorQuery) {
-//       const authorId = parseInt(authorQuery as string);
-//       if (isNaN(authorId)) {
-//         return next(
-//           new ValidationError([{ field: "author", message: "Invalid query" }])
-//         );
-//       }
-//       const authorExists = await prisma.author.findUnique({
-//         where: { id: authorId },
-//       });
-//       if (!authorExists) {
-//         return next(
-//           new ValidationError([
-//             { field: "author", message: "authorId does not exist" },
-//           ])
-//         );
-//       }
-//       filters.authorId = authorId;
-//     }
-
-//     if (titleQuery) {
-//       filters.title = {
-//         contains: titleQuery as string,
-//         mode: "insensitive",
-//       };
-//     }
-
-//     if (authorNameQuery) {
-//       const authors = await prisma.author.findMany({
-//         where: {
-//           name: {
-//             contains: authorNameQuery as string,
-//             mode: "insensitive",
-//           },
-//         },
-//         select: {
-//           id: true,
-//         },
-//       });
-
-//       if (authors.length === 0) {
-//         return next(
-//           new ValidationError([
-//             {
-//               field: "authorName",
-//               message: "No authors found with the given name",
-//             },
-//           ])
-//         );
-//       }
-
-//       filters.authorId = {
-//         in: authors.map((author) => author.id),
-//       };
-//     }
-
-//     const books = await prisma.book.findMany({
-//       where: filters,
-//     });
-
-//     successResponse(res, books, "Books retrieved successfully");
-//   } catch (error) {
-//     console.error(error);
-//     next(new UpdateError());
-//   }
-// };
-
-type QueryParams = {
+//define possible query params types interface
+interface QueryParams {
   author?: string;
   title?: string;
   authorName?: string;
   page?: string;
   size?: string;
-};
+}
 
 export const getBooks = async (
   req: Request<QueryParams, {}, {}>,
@@ -151,16 +38,13 @@ export const getBooks = async (
 
     if (authorQuery) {
       const authorId = parseInt(authorQuery as string);
-      if (isNaN(authorId)) {
-        return next(
-          new ValidationError([{ field: "author", message: "Invalid query" }])
-        );
-      }
+      if (isNaN(authorId))
+        throw new BadRequetError("Invalid query", ErrorCodes.NOT_FOUND);
       const authorExists = await prisma.author.findUnique({
         where: { id: authorId },
       });
       if (!authorExists) {
-        return next(
+        next(
           new ValidationError([
             { field: "author", message: "authorId does not exist" },
           ])
@@ -204,7 +88,7 @@ export const getBooks = async (
         in: authors.map((author) => author.id),
       };
     }
-
+    // pagination,defaults to first page and 10 size if no query params provided
     const page = parseInt(pageQuery as string) || 1;
     const size = parseInt(sizeQuery as string) || 10;
     const skip = (page - 1) * size;
@@ -224,16 +108,12 @@ export const getBooks = async (
 };
 
 export const getBookById = async (
-  req: Request,
+  req: Request<{ id: string }, {}, {}>,
   res: Response,
   next: NextFunction
 ) => {
   const id = parseInt(req.params.id);
-  if (isNaN(id)) {
-    return next(
-      new ValidationError([{ field: "id", message: "id must be a number" }])
-    );
-  }
+
   try {
     const book = await prisma.book.findUnique({
       where: { id },
@@ -251,11 +131,7 @@ export const deleteBook = async (
   next: NextFunction
 ) => {
   const id = parseInt(req.params.id);
-  if (isNaN(id)) {
-    return next(
-      new ValidationError([{ field: "id", message: "id must be a number" }])
-    );
-  }
+
   try {
     await prisma.book.delete({
       where: { id },
@@ -270,7 +146,7 @@ interface ID {
 }
 
 export const updateBook = async (
-  req: Request<ID, {}, Prisma.BookUpdateInput>,
+  req: Request<any, {}, Prisma.BookUpdateInput>,
   res: Response,
   next: NextFunction
 ) => {
@@ -357,6 +233,30 @@ export const createBook1 = async (
     successResponse(res, updatedBook, "Book updated successfully");
   } catch (error) {
     console.log(error);
+    next(new UpdateError());
+  }
+};
+
+export const getBookDetails = async (
+  req: Request<ID, {}, {}>,
+  res: Response,
+  next: NextFunction
+) => {
+  const id = parseInt(req.params.id);
+
+  try {
+    const book = await prisma.book.findUnique({
+      where: { id },
+      include: {
+        author: true,
+      },
+    });
+    if (!book) {
+      return next(new NotFoundError());
+    }
+    successResponse(res, book, "Book details retrieved successfully");
+  } catch (error) {
+    console.error(error);
     next(new UpdateError());
   }
 };

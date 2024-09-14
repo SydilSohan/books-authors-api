@@ -1,9 +1,15 @@
-// src/controllers/authorController.ts
+//handle all authors endpoints
 import { Request, Response, NextFunction } from "express";
-import { successResponse } from "../Utils/response";
-import { NotFoundError, UpdateError } from "@src/Utils/Errors";
 import prisma from "@src/prisma/prismaClient";
 import { Prisma } from "@prisma/client";
+import { successResponse } from "@src/Utils/response";
+import {
+  NotFoundError,
+  UpdateError,
+  ValidationError,
+} from "@src/exceptions/Errors";
+import { BadRequetError } from "@src/exceptions/BadRequest";
+import { CustomError, ErrorCodes } from "@src/exceptions/CustomError";
 
 type QueryParams = {
   name?: string;
@@ -11,7 +17,23 @@ type QueryParams = {
   size?: string;
   id?: string;
 };
+//
 
+export const deleteAuthor = async (
+  req: Request<{ id: string }, {}, {}>,
+  res: Response,
+  next: NextFunction
+) => {
+  const id = parseInt(req.params.id);
+  try {
+    await prisma.author.delete({
+      where: { id },
+    });
+    successResponse(res, null, "Author deleted successfully");
+  } catch (error) {
+    next(new NotFoundError());
+  }
+};
 export const getAuthors = async (
   req: Request<QueryParams, {}, {}>,
   res: Response,
@@ -35,7 +57,7 @@ export const getAuthors = async (
         mode: "insensitive",
       };
     }
-
+    //simple pagination defaults to first page and 10 size if params not provided
     const page = parseInt(pageQuery as string) || 1;
     const size = parseInt(sizeQuery as string) || 10;
     const skip = (page - 1) * size;
@@ -72,7 +94,7 @@ export const getAuthorById = async (
     next(new UpdateError());
   }
 };
-
+//create author after successfuly middleware validation of inputs
 export const createAuthor = async (
   req: Request<{}, {}, Prisma.AuthorCreateInput>,
   res: Response,
@@ -86,6 +108,48 @@ export const createAuthor = async (
     successResponse(res, newAuthor, "Author created successfully");
   } catch (error) {
     console.log(error);
+    next(new UpdateError());
+  }
+};
+//handle author detailed view with books
+export const getAuthorDetails = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const id = parseInt(req.params.id);
+
+  try {
+    const author = await prisma.author.findUnique({
+      where: { id },
+      include: {
+        books: true,
+      },
+    });
+    if (!author) {
+      throw new BadRequetError("Author not found", ErrorCodes.NOT_FOUND);
+    }
+    successResponse(res, author, "Author details retrieved successfully");
+  } catch (error) {
+    console.error(error);
+  }
+};
+export const updateAuthor = async (
+  req: Request<{ id: string }, {}, Prisma.AuthorUpdateInput>,
+  res: Response,
+  next: NextFunction
+) => {
+  const id = parseInt(req.params.id);
+
+  try {
+    const updatedAuthor = await prisma.author.update({
+      where: { id },
+      data: {
+        ...req.body,
+      },
+    });
+    successResponse(res, updatedAuthor, "Book updated successfully");
+  } catch (error) {
     next(new UpdateError());
   }
 };

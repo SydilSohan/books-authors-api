@@ -1,11 +1,12 @@
-// src/app.ts
 import express from "express";
 import dotenv from "dotenv";
 import limiter from "./middlewares/limiter";
 import authorRoutes from "./routes/authorRoutes";
 import { errorHandler } from "./middlewares/errorHandler";
 import bookRoutes from "./routes/bookRoutes";
-import { NotFoundError } from "./Utils/Errors";
+import { BadRequetError } from "./exceptions/BadRequest";
+import { ErrorCodes } from "./exceptions/CustomError";
+import { validateParams } from "./middlewares/validateParamId";
 
 dotenv.config();
 
@@ -18,7 +19,8 @@ app.use("/api/authors", authorRoutes);
 app.use("/api/books", bookRoutes);
 // Error handling middleware
 app.all("*", (req, res, next) => {
-  next(new NotFoundError());
+  throw new BadRequetError("Path not found", ErrorCodes.NOT_FOUND);
 });
+app.use(validateParams);
 app.use(errorHandler);
 export default app;

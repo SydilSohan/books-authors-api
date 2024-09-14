@@ -1,11 +1,11 @@
-// src/middlewares/errorHandler.ts
+// global error handler use to catch errors from uncaught errors and next fn throw error
+import { CustomError } from "@src/exceptions/CustomError";
+import { ValidationError } from "@src/exceptions/Errors";
+import logger from "@src/Utils/logger";
 import { Request, Response, NextFunction } from "express";
-import { CustomError } from "../Utils/CustomError";
-import logger from "../Utils/logger";
-import { ValidationError } from "@src/Utils/Errors";
 
 export const errorHandler = (
-  err: any,
+  err: Error,
   req: Request,
   res: Response,
   next: NextFunction
@@ -14,6 +14,7 @@ export const errorHandler = (
   const userAgent = headers["user-agent"] || "unknown";
 
   if (err instanceof CustomError) {
+    //handle known errors
     logger.error(err.message, {
       method,
       url,
@@ -28,6 +29,7 @@ export const errorHandler = (
       ...(err instanceof ValidationError && { details: err.details }),
     });
   } else {
+    //handle unknowm errors
     logger.error("Internal Server Error", {
       method,
       url,

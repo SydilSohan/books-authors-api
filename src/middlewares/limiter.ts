@@ -1,3 +1,4 @@
+//simple rate limiter to protect from ddos attacks
 import rateLimit from "express-rate-limit";
 
 const limiter = rateLimit({
