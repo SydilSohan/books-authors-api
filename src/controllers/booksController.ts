@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { PrismaClient, Prisma } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 
 import { BadRequetError } from "@src/exceptions/BadRequest";
 import { ErrorCodes } from "@src/exceptions/CustomError";
@@ -7,10 +7,9 @@ import {
   NotFoundError,
   UpdateError,
   ValidationError,
-} from "@src/exceptions/Errors";
-import { successResponse } from "@src/Utils/response";
+} from "@src/exceptions/ErrorClasses";
+import prisma from "@src/utils/prismaClient";
 
-const prisma = new PrismaClient();
 //define possible query params types interface
 interface QueryParams {
   author?: string;
@@ -259,4 +258,16 @@ export const getBookDetails = async (
     console.error(error);
     next(new UpdateError());
   }
+};
+
+export const successResponse = (
+  res: Response,
+  data: any,
+  message = "Success"
+) => {
+  res.status(200).json({
+    status: "success",
+    message,
+    data,
+  });
 };

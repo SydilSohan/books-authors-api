@@ -9,7 +9,7 @@ import {
   getBookDetails,
 } from "../controllers/booksController";
 import { validateMiddleware } from "@src/middlewares/validate";
-import { bookSchema } from "@src/Utils/joiSchemas";
+import { bookSchema } from "@src/utils/joiSchemas";
 
 const router = Router();
 router.get("/", getBooks);

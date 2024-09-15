@@ -1,6 +1,6 @@
 // validate req.body before controller function call
 
-import { ValidationError } from "@src/exceptions/Errors";
+import { ValidationError } from "@src/exceptions/ErrorClasses";
 import { Request, Response, NextFunction } from "express";
 import { ValidationErrorItem, Schema } from "joi";
 

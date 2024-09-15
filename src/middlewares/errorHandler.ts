@@ -1,7 +1,7 @@
 // global error handler use to catch errors from uncaught errors and next fn throw error
 import { CustomError } from "@src/exceptions/CustomError";
-import { ValidationError } from "@src/exceptions/Errors";
-import logger from "@src/Utils/logger";
+import { ValidationError } from "@src/exceptions/ErrorClasses";
+import logger from "@src/utils/logger";
 import { Request, Response, NextFunction } from "express";
 
 export const errorHandler = (

@@ -1,15 +1,15 @@
 //handle all authors endpoints
 import { Request, Response, NextFunction } from "express";
-import prisma from "@src/prisma/prismaClient";
 import { Prisma } from "@prisma/client";
-import { successResponse } from "@src/Utils/response";
 import {
   NotFoundError,
   UpdateError,
   ValidationError,
-} from "@src/exceptions/Errors";
+} from "@src/exceptions/ErrorClasses";
 import { BadRequetError } from "@src/exceptions/BadRequest";
 import { CustomError, ErrorCodes } from "@src/exceptions/CustomError";
+import prisma from "@src/utils/prismaClient";
+import { successResponse } from "./booksController";
 
 type QueryParams = {
   name?: string;
@@ -31,7 +31,32 @@ export const deleteAuthor = async (
     });
     successResponse(res, null, "Author deleted successfully");
   } catch (error) {
+    console.log(error);
     next(new NotFoundError());
+  }
+};
+
+export const getAuthorBooks = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const id = parseInt(req.params.id);
+
+  try {
+    const author = await prisma.author.findUnique({
+      where: { id },
+      include: {
+        books: true,
+      },
+    });
+    if (!author) {
+      return next(new NotFoundError());
+    }
+    successResponse(res, author.books, "Author books retrieved successfully");
+  } catch (error) {
+    console.error(error);
+    next(new UpdateError());
   }
 };
 export const getAuthors = async (
@@ -86,12 +111,13 @@ export const getAuthorById = async (
     const author = await prisma.author.findUnique({
       where: { id },
     });
+    console.log(author);
     if (!author) {
       return next(new NotFoundError());
     }
-    successResponse(res, author);
+    successResponse(res, author, "Author retrieved successfully");
   } catch (error) {
-    next(new UpdateError());
+    next(new NotFoundError());
   }
 };
 //create author after successfuly middleware validation of inputs
@@ -132,6 +158,7 @@ export const getAuthorDetails = async (
     successResponse(res, author, "Author details retrieved successfully");
   } catch (error) {
     console.error(error);
+    next(new NotFoundError());
   }
 };
 export const updateAuthor = async (

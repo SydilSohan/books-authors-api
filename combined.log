@@ -231,3 +231,88 @@ Invalid value for argument `birthdate`: premature end of input. Expected ISO-860
 2024-09-14T08:37:22.339Z [ERROR]: Resource not found {"method":"DELETE","url":"/api/books/2","userAgent":"node","body":{},"statusCode":404}
 2024-09-14T08:37:32.796Z [ERROR]: Resource not found {"method":"DELETE","url":"/api/books/10","userAgent":"node","body":{},"statusCode":404}
 2024-09-14T08:37:45.951Z [ERROR]: Resource not found {"method":"GET","url":"/api/books/10","userAgent":"node","body":{},"statusCode":404}
+2024-09-15T15:16:55.596Z [ERROR]: Failed to update resource {"method":"POST","url":"/api/authors","userAgent":"PostmanRuntime/7.42.0","body":{"name":"J.K. Rowling","bio":"British author, best known for the Harry Potter series.","birthdate":"1965-07-31"},"statusCode":500}
+2024-09-15T15:16:55.924Z [ERROR]: Failed to update resource {"method":"GET","url":"/api/authors/with-books","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":500}
+2024-09-15T15:16:56.209Z [ERROR]: Resource not found {"method":"DELETE","url":"/api/authors/1","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:16:56.308Z [ERROR]: Failed to update resource {"method":"POST","url":"/api/books","userAgent":"PostmanRuntime/7.42.0","body":{"title":"Harry Potter and the Philosopher's Stone","author":1,"published_date":"1997-06-26","description":"The first book in the Harry Potter series."},"statusCode":500}
+2024-09-15T15:16:56.467Z [ERROR]: Resource not found {"method":"GET","url":"/api/books/1","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:16:56.545Z [ERROR]: Resource not found {"method":"GET","url":"/api/books/1/details","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:16:56.659Z [ERROR]: Resource not found {"method":"DELETE","url":"/api/books/1","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:24:08.522Z [ERROR]: Failed to update resource {"method":"GET","url":"/api/authors/with-books","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":500}
+2024-09-15T15:24:08.677Z [ERROR]: Resource not found {"method":"DELETE","url":"/api/authors/1","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:24:08.954Z [ERROR]: Resource not found {"method":"GET","url":"/api/books/1","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:24:09.061Z [ERROR]: Resource not found {"method":"GET","url":"/api/books/1/details","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:24:09.184Z [ERROR]: Resource not found {"method":"DELETE","url":"/api/books/1","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:28:28.040Z [ERROR]: Failed to update resource {"method":"GET","url":"/api/authors/with-books","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":500}
+2024-09-15T15:28:28.213Z [ERROR]: Resource not found {"method":"DELETE","url":"/api/authors/1","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:31:46.941Z [ERROR]: Resource not found {"method":"DELETE","url":"/api/authors/1","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:31:47.214Z [ERROR]: Resource not found {"method":"GET","url":"/api/books/1","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:31:47.283Z [ERROR]: Resource not found {"method":"GET","url":"/api/books/1/details","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:31:47.391Z [ERROR]: Resource not found {"method":"DELETE","url":"/api/books/1","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:32:02.388Z [ERROR]: Resource not found {"method":"DELETE","url":"/api/authors/1","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:32:02.751Z [ERROR]: Resource not found {"method":"GET","url":"/api/books/1","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:32:02.853Z [ERROR]: Resource not found {"method":"GET","url":"/api/books/1/details","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:32:02.929Z [ERROR]: Resource not found {"method":"DELETE","url":"/api/books/1","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:36:33.244Z [ERROR]: Resource not found {"method":"GET","url":"/api/authors/1","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:38:08.514Z [ERROR]: Resource not found {"method":"GET","url":"/api/authors/1","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:38:23.681Z [ERROR]: Resource not found {"method":"GET","url":"/api/authors/1","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:39:11.083Z [ERROR]: Resource not found {"method":"GET","url":"/api/authors/1","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:40:29.746Z [ERROR]: Resource not found {"method":"GET","url":"/api/authors/1","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:41:06.262Z [ERROR]: Resource not found {"method":"GET","url":"/api/authors/1","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:41:47.502Z [ERROR]: Resource not found {"method":"GET","url":"/api/authors/1","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:41:47.568Z [ERROR]: Resource not found {"method":"GET","url":"/api/authors/1/details","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:41:47.675Z [ERROR]: Resource not found {"method":"DELETE","url":"/api/authors/1","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:41:47.772Z [ERROR]: Validation failed {"method":"POST","url":"/api/books","userAgent":"PostmanRuntime/7.42.0","body":{"title":"Harry Potter and the Philosopher's Stone","author":1,"published_date":"1997-06-26T00:00:00.000Z","description":"The first book in the Harry Potter series."},"statusCode":400}
+2024-09-15T15:41:47.939Z [ERROR]: Resource not found {"method":"GET","url":"/api/books/1","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:41:48.032Z [ERROR]: Resource not found {"method":"GET","url":"/api/books/1/details","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:41:48.096Z [ERROR]: Resource not found {"method":"DELETE","url":"/api/books/1","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:42:22.098Z [ERROR]: Resource not found {"method":"GET","url":"/api/authors/1","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:42:22.163Z [ERROR]: Resource not found {"method":"GET","url":"/api/authors/1/details","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:42:22.242Z [ERROR]: Resource not found {"method":"DELETE","url":"/api/authors/1","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:42:22.301Z [ERROR]: Validation failed {"method":"POST","url":"/api/books","userAgent":"PostmanRuntime/7.42.0","body":{"title":"Harry Potter and the Philosopher's Stone","author":1,"published_date":"1997-06-26T00:00:00.000Z","description":"The first book in the Harry Potter series."},"statusCode":400}
+2024-09-15T15:42:22.439Z [ERROR]: Resource not found {"method":"GET","url":"/api/books/1","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:42:22.531Z [ERROR]: Resource not found {"method":"GET","url":"/api/books/1/details","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:42:22.596Z [ERROR]: Resource not found {"method":"DELETE","url":"/api/books/1","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:47:31.986Z [ERROR]: Resource not found {"method":"GET","url":"/api/authors/1","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:47:32.068Z [ERROR]: Failed to update resource {"method":"GET","url":"/api/authors/with-books","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":500}
+2024-09-15T15:47:32.256Z [ERROR]: Resource not found {"method":"GET","url":"/api/authors/1/details","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:47:32.411Z [ERROR]: Resource not found {"method":"DELETE","url":"/api/authors/1","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:47:32.514Z [ERROR]: Validation failed {"method":"POST","url":"/api/books","userAgent":"PostmanRuntime/7.42.0","body":{"title":"Harry Potter and the Philosopher's Stone","author":1,"published_date":"1997-06-26T00:00:00.000Z","description":"The first book in the Harry Potter series."},"statusCode":400}
+2024-09-15T15:47:32.725Z [ERROR]: Resource not found {"method":"GET","url":"/api/books/1","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:47:32.813Z [ERROR]: Resource not found {"method":"GET","url":"/api/books/1/details","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:47:32.908Z [ERROR]: Resource not found {"method":"DELETE","url":"/api/books/1","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:49:00.857Z [ERROR]: Failed to update resource {"method":"GET","url":"/api/authors/with-books","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":500}
+2024-09-15T15:49:58.323Z [ERROR]: Resource not found {"method":"GET","url":"/api/books/1","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:50:00.676Z [ERROR]: Resource not found {"method":"GET","url":"/api/books/20","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:50:03.823Z [ERROR]: Resource not found {"method":"GET","url":"/api/books/40","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:50:05.712Z [ERROR]: Resource not found {"method":"GET","url":"/api/books/44","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:50:07.223Z [ERROR]: Resource not found {"method":"GET","url":"/api/books/43","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:50:08.301Z [ERROR]: Resource not found {"method":"GET","url":"/api/books/42","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:50:09.372Z [ERROR]: Resource not found {"method":"GET","url":"/api/books/41","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:50:20.678Z [ERROR]: Resource not found {"method":"GET","url":"/api/books/63","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:50:22.012Z [ERROR]: Resource not found {"method":"GET","url":"/api/books/63","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:50:34.744Z [ERROR]: Resource not found {"method":"DELETE","url":"/api/authors/64","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:50:41.718Z [ERROR]: Resource not found {"method":"DELETE","url":"/api/authors/42","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:50:45.096Z [ERROR]: Resource not found {"method":"DELETE","url":"/api/authors/44","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:50:55.438Z [ERROR]: Resource not found {"method":"DELETE","url":"/api/authors/42","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:51:48.346Z [ERROR]: Resource not found {"method":"DELETE","url":"/api/authors/42","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:51:49.517Z [ERROR]: Resource not found {"method":"DELETE","url":"/api/authors/42","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:51:54.542Z [ERROR]: Resource not found {"method":"DELETE","url":"/api/authors/44","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:52:32.027Z [ERROR]: Resource not found {"method":"DELETE","url":"/api/authors/44","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:52:39.723Z [ERROR]: Resource not found {"method":"DELETE","url":"/api/authors/44","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:53:38.105Z [ERROR]: Resource not found {"method":"DELETE","url":"/api/authors/44","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:53:58.332Z [ERROR]: Resource not found {"method":"DELETE","url":"/api/authors/44","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:53:59.498Z [ERROR]: Resource not found {"method":"DELETE","url":"/api/authors/44","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:54:08.691Z [ERROR]: Resource not found {"method":"DELETE","url":"/api/authors/44","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:54:13.911Z [ERROR]: Path not found {"method":"DELETE","url":"/api/author/44","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:54:16.661Z [ERROR]: Resource not found {"method":"DELETE","url":"/api/authors/44","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:54:19.321Z [ERROR]: Resource not found {"method":"DELETE","url":"/api/authors/4","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:54:21.777Z [ERROR]: Resource not found {"method":"DELETE","url":"/api/authors/45","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:54:23.094Z [ERROR]: Resource not found {"method":"DELETE","url":"/api/authors/45","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:54:50.150Z [ERROR]: Resource not found {"method":"DELETE","url":"/api/authors/45","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:55:58.574Z [ERROR]: Resource not found {"method":"DELETE","url":"/api/authors/45","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:57:57.707Z [ERROR]: Resource not found {"method":"DELETE","url":"/api/authors/45","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:58:39.127Z [ERROR]: Resource not found {"method":"GET","url":"/api/books/5/details","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:58:42.886Z [ERROR]: Resource not found {"method":"GET","url":"/api/books/70/details","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:58:46.453Z [ERROR]: Resource not found {"method":"GET","url":"/api/books/60/details","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
+2024-09-15T15:58:48.236Z [ERROR]: Resource not found {"method":"GET","url":"/api/books/40/details","userAgent":"PostmanRuntime/7.42.0","body":{},"statusCode":404}
